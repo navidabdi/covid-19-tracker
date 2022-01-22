@@ -6,7 +6,7 @@ function App() {
   const { isLoading } = useStateContext();
 
   return (
-    <div className="container">
+    <div className="containerr">
       {/* <div className="others">2</div> */}
       <div className="counties">{isLoading && <CountryDetial />}</div>
     </div>
