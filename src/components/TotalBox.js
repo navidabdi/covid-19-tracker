@@ -4,29 +4,119 @@ import { useStateContext } from '../contexts/StateCovidTracker';
 
 // Images
 import covidDefault from '../img/covid-defult.svg';
+import covidRed from '../img/covid-red.svg';
+import covidGreen from '../img/covid-green.svg';
+import covidBlue from '../img/covid-blue.svg';
+import covidOrange from '../img/covid-orange.svg';
+import covidRedDark from '../img/covid-redark.svg';
 
 const TotalBox = () => {
+  const { countryInfo } = useStateContext();
+
   return (
-    <StyledTotalBox>
-      <div className="icon">
-        <img src={covidDefault} alt="" />
-      </div>
-      <div className="info">
-        <h3>Total Cases</h3>
-        <h4>7125453</h4>
-      </div>
-    </StyledTotalBox>
+    <StyeldAllTotalBoxes>
+      <StyledTotalBox>
+        <div className="icon">
+          <img src={covidBlue} alt="" />
+        </div>
+        <div className="info">
+          <h3>Population</h3>
+          <h4>{countryInfo.population.NumberFormat('en-US')}</h4>
+        </div>
+      </StyledTotalBox>
+      <StyledTotalBox>
+        <div className="icon">
+          <img src={covidDefault} alt="" />
+        </div>
+        <div className="info">
+          <h3>Total Cases</h3>
+          <h4>{countryInfo.cases}</h4>
+        </div>
+      </StyledTotalBox>
+      <StyledTotalBox>
+        <div className="icon">
+          <img src={covidRed} alt="" />
+        </div>
+        <div className="info">
+          <h3>Total Deaths</h3>
+          <h4>{countryInfo.deaths}</h4>
+        </div>
+      </StyledTotalBox>
+
+      <StyledTotalBox>
+        <div className="icon">
+          <img src={covidGreen} alt="" />
+        </div>
+        <div className="info">
+          <h3>Total Recovered</h3>
+          <h4>{countryInfo.recovered}</h4>
+        </div>
+      </StyledTotalBox>
+
+      <StyledTotalBox>
+        <div className="icon">
+          <img src={covidBlue} alt="" />
+        </div>
+        <div className="info">
+          <h3>Total Active</h3>
+          <h4>{countryInfo.active}</h4>
+        </div>
+      </StyledTotalBox>
+
+      <StyledTotalBox>
+        <div className="icon">
+          <img src={covidOrange} alt="" />
+        </div>
+        <div className="info">
+          <h3>Today Cases</h3>
+          <h4>{countryInfo.todayCases}</h4>
+        </div>
+      </StyledTotalBox>
+      <StyledTotalBox>
+        <div className="icon">
+          <img src={covidRedDark} alt="" />
+        </div>
+        <div className="info">
+          <h3>Today Deaths</h3>
+          <h4>{countryInfo.todayDeaths}</h4>
+        </div>
+      </StyledTotalBox>
+      <StyledTotalBox>
+        <div className="icon">
+          <img src={covidGreen} alt="" />
+        </div>
+        <div className="info">
+          <h3>Today Recovered</h3>
+          <h4>{countryInfo.todayRecovered}</h4>
+        </div>
+      </StyledTotalBox>
+      <StyledTotalBox>
+        <div className="icon">
+          <img src={covidDefault} alt="" />
+        </div>
+        <div className="info">
+          <h3>Total Tests</h3>
+          <h4>{countryInfo.tests}</h4>
+        </div>
+      </StyledTotalBox>
+    </StyeldAllTotalBoxes>
   );
 };
 
 export default TotalBox;
 
+const StyeldAllTotalBoxes = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  grid-gap: 2em;
+  margin-bottom: 2rem;
+`;
+
 const StyledTotalBox = styled.div`
   box-shadow: 0 15px 30px 0 rgba(20, 50, 90, 0.05);
   border-color: #3639ae;
   background: #fff;
-  padding: 1.5rem;
-  margin-bottom: 30px;
+  padding: 1.8rem;
   position: relative;
   overflow: hidden;
   z-index: 1;

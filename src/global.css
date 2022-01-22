@@ -3,6 +3,10 @@
   margin: 0;
   box-sizing: border-box;
 }
+a {
+  color: #515184;
+  text-decoration: none;
+}
 body {
   font-family: sans-serif;
   overflow-x: hidden;
@@ -10,7 +14,7 @@ body {
   background-color: #f7f8fc;
 }
 .container {
-  width: 1280px;
+  width: 90%;
   margin: auto;
 }
 .counties {

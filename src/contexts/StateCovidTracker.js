@@ -9,6 +9,17 @@ export const StateCovidTracker = ({ children }) => {
   //   State Of Loading
   const [isLoading, setIsLoading] = useState(false);
   const [countries, setCountries] = useState([]);
+
+  const [countryInfo, setCountryInfo] = useState({});
+
+  useEffect(() => {
+    fetch('https://disease.sh/v3/covid-19/all')
+      .then((response) => response.json())
+      .then((data) => {
+        setCountryInfo(data);
+      });
+  }, []);
+
   useEffect(() => {
     const getCountriesData = async () => {
       fetch('https://disease.sh/v3/covid-19/countries')
@@ -36,6 +47,7 @@ export const StateCovidTracker = ({ children }) => {
     <StateContext.Provider
       value={{
         countries,
+        countryInfo,
         darkMode,
         setDarkMode,
         isLoading,
