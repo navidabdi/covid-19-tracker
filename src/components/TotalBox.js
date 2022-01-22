@@ -27,7 +27,7 @@ const TotalBox = () => {
     <>
       {isLoading && (
         <StyeldAllTotalBoxes>
-          <StyledTotalBox>
+          <StyledTotalBox className="blue">
             <div className="icon">
               <img src={covidBlue} alt="" />
             </div>
@@ -36,7 +36,7 @@ const TotalBox = () => {
               <h4>{numberWithCommas(population)}</h4>
             </div>
           </StyledTotalBox>
-          <StyledTotalBox>
+          <StyledTotalBox className="default">
             <div className="icon">
               <img src={covidDefault} alt="" />
             </div>
@@ -45,7 +45,7 @@ const TotalBox = () => {
               <h4>{numberWithCommas(tests)}</h4>
             </div>
           </StyledTotalBox>
-          <StyledTotalBox>
+          <StyledTotalBox className="default">
             <div className="icon">
               <img src={covidDefault} alt="" />
             </div>
@@ -54,7 +54,7 @@ const TotalBox = () => {
               <h4>{numberWithCommas(cases)}</h4>
             </div>
           </StyledTotalBox>
-          <StyledTotalBox>
+          <StyledTotalBox className="red">
             <div className="icon">
               <img src={covidRed} alt="" />
             </div>
@@ -64,7 +64,7 @@ const TotalBox = () => {
             </div>
           </StyledTotalBox>
 
-          <StyledTotalBox>
+          <StyledTotalBox className="green">
             <div className="icon">
               <img src={covidGreen} alt="" />
             </div>
@@ -74,7 +74,7 @@ const TotalBox = () => {
             </div>
           </StyledTotalBox>
 
-          <StyledTotalBox>
+          <StyledTotalBox className="blue">
             <div className="icon">
               <img src={covidBlue} alt="" />
             </div>
@@ -84,7 +84,7 @@ const TotalBox = () => {
             </div>
           </StyledTotalBox>
 
-          <StyledTotalBox>
+          <StyledTotalBox className="orange">
             <div className="icon">
               <img src={covidOrange} alt="" />
             </div>
@@ -93,7 +93,8 @@ const TotalBox = () => {
               <h4>{numberWithCommas(todayCases)}</h4>
             </div>
           </StyledTotalBox>
-          <StyledTotalBox>
+
+          <StyledTotalBox className="redark">
             <div className="icon">
               <img src={covidRedDark} alt="" />
             </div>
@@ -102,7 +103,8 @@ const TotalBox = () => {
               <h4>{numberWithCommas(todayDeaths)}</h4>
             </div>
           </StyledTotalBox>
-          <StyledTotalBox>
+
+          <StyledTotalBox className="green">
             <div className="icon">
               <img src={covidGreen} alt="" />
             </div>
@@ -124,6 +126,28 @@ const StyeldAllTotalBoxes = styled.div`
   grid-template-columns: repeat(auto-fit, minmax(318px, 1fr));
   grid-gap: 2em;
   margin-bottom: 2rem;
+  @media only screen and (max-width: 768px) {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-gap: 1em;
+  }
+  .blue .info h4 {
+    color: #2c6dff;
+  }
+  .default .info h4 {
+    color: #3639ae;
+  }
+  .green .info h4 {
+    color: #82c519;
+  }
+  .orange .info h4 {
+    color: #ff6a07;
+  }
+  .redark .info h4 {
+    color: #b70202;
+  }
+  .red .info h4 {
+    color: #e00000;
+  }
 `;
 
 const StyledTotalBox = styled.div`
@@ -165,9 +189,11 @@ const StyledTotalBox = styled.div`
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   }
   .info h4 {
-    color: #3639ae;
-    font-size: 35px;
+    font-size: 1.8rem;
     margin-bottom: 0;
     font-weight: 600;
+    @media only screen and (max-width: 768px) {
+      font-size: 1.5rem;
+    }
   }
 `;

@@ -1,18 +1,24 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useStateContext } from '../contexts/StateCovidTracker';
+import { HumanTime } from '../Util';
 // Logo
 import logo from '../img/logo.png';
 const Header = () => {
+  const { countryInfo, isLoading } = useStateContext();
+
+  console.log(HumanTime());
   return (
     <StyledHeader>
       <div className="container">
         <nav>
           <a className="logo" href="/">
             <img src={logo} alt="COVID-19 Tracker Logo" />
-            <p>COVID-19 Tracker</p>
+            <p>COVID-19 TRAKER</p>
           </a>
-          <h3 className="last-update">Updated: January 22, 2022</h3>
+          <h3 className="last-update">
+            Updated: {isLoading && HumanTime(countryInfo.updated)}
+          </h3>
         </nav>
       </div>
     </StyledHeader>
