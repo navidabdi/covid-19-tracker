@@ -6,8 +6,6 @@ import { HumanTime } from '../Util';
 import logo from '../img/logo.png';
 const Header = () => {
   const { countryInfo, isLoading } = useStateContext();
-
-  console.log(HumanTime());
   return (
     <StyledHeader>
       <div className="container">

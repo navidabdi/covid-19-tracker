@@ -1,65 +1,82 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useStateContext } from '../contexts/StateCovidTracker';
-
+import { numberWithCommas } from '../Util';
 const CountryDetial = () => {
   const { countries, isLoading } = useStateContext();
   return (
     <StyledCountyDetail>
-      <thead>
-        <tr>
-          <th scope="col">Region</th>
-          <th scope="col">Total Cases</th>
-          <th scope="col">New Cases</th>
-          <th scope="col">Total Deaths</th>
-          <th scope="col">New Deaths</th>
-          <th scope="col">Total Recovered</th>
-        </tr>
-      </thead>
-      <tbody>
-        {isLoading &&
-          countries.map((country, index) => (
-            <tr className="country-detial" key={index}>
-              <td className="flag">
-                <img src={country.flag} alt={country.name} />
-                <span>{country.name}</span>
-              </td>
-              {/* <td className="name">{country.name}</td> */}
-              <td className="total-cases">{country.cases}</td>
-              <td className="new-cases">{country.new}</td>
-              <td className="toatal-deaths">{country.deaths}</td>
-              <td className="new-deaths">{country.newDeaths}</td>
-              <td className="total-recovered">{country.recovered}</td>
-            </tr>
-          ))}
-      </tbody>
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Region</th>
+            <th scope="col">Total Cases</th>
+            <th scope="col">New Cases</th>
+            <th scope="col">Total Deaths</th>
+            <th scope="col">New Deaths</th>
+            <th scope="col">Total Recovered</th>
+          </tr>
+        </thead>
+        <tbody>
+          {isLoading &&
+            countries.map((country, index) => (
+              <tr className="country-detial" key={index}>
+                <td className="flag">
+                  <img src={country.flag} alt={country.name} />
+                  <span>{country.name}</span>
+                </td>
+                {/* <td className="name">{country.name}</td> */}
+                <td className="total-cases">
+                  {numberWithCommas(country.cases)}
+                </td>
+                <td className="new-cases">
+                  {numberWithCommas(country.newCases)}
+                </td>
+                <td className="toatal-deaths">
+                  {numberWithCommas(country.deaths)}
+                </td>
+                <td className="new-deaths">
+                  {numberWithCommas(country.newDeaths)}
+                </td>
+                <td className="total-recovered">
+                  {numberWithCommas(country.recovered)}
+                </td>
+              </tr>
+            ))}
+        </tbody>
+      </table>
     </StyledCountyDetail>
   );
 };
 
 export default CountryDetial;
 
-const StyledCountyDetail = styled.table`
-  width: 100%;
-  border-collapse: collapse;
-  @media only screen and (max-width: 760px) {
-    /* Force table to not be like tables anymore */
-
-    display: block;
+const StyledCountyDetail = styled.div`
+  height: 500px;
+  overflow-y: scroll;
+  margin-bottom: 2rem;
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
   }
   /* Zebra striping */
   tr:nth-of-type(odd) {
-    background: #eee;
+    background: #f8f9fe;
+  }
+  thead th {
+    font-size: 0.9rem;
   }
   th {
-    background: #333;
-    color: white;
+    background-color: #fff;
+    padding: 20px 0 20px 5px;
     font-weight: bold;
-  }
-  td,
-  th {
-    padding: 6px;
     text-align: left;
+  }
+  td {
+    text-align: left;
+    padding: 15px 5px;
+    border-bottom: 1px solid #e6ebff;
   }
   @media only screen and (max-width: 760px) {
     /* Force table to not be like tables anymore */
@@ -80,19 +97,19 @@ const StyledCountyDetail = styled.table`
     }
 
     tr {
-      border: 1px solid #ccc;
-    }
-    tr:nth-of-type(odd) td {
-      border-bottom: 1px solid rgb(255, 255, 255);
+      border: 1px solid #dce3ff;
     }
 
     td {
       /* Behave  like a "row" */
-      border: none;
-      border-bottom: 1px solid #eee;
+      border-bottom: 1px solid #ebebeb;
       position: relative;
       padding: 10px 0;
       padding-left: 50%;
+
+      &:last-child {
+        border-bottom: none;
+      }
     }
 
     td:before {
@@ -131,24 +148,20 @@ const StyledCountyDetail = styled.table`
       content: 'TOTAL RECOVERED';
     }
   }
-
   .flag {
     display: flex;
     align-items: center;
     img {
-      width: 50px;
+      width: 30px;
+      border-radius: 3px;
       margin-right: 10px;
       @media only screen and (max-width: 760px) {
         width: 30px;
       }
     }
     span {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      display: -webkit-box;
-      -webkit-line-clamp: 1;
-      -webkit-box-orient: vertical;
-      text-align: left;
+      text-transform: uppercase;
+      font-size: 0.8rem;
     }
   }
 `;

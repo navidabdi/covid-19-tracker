@@ -130,29 +130,51 @@ const StyeldAllTotalBoxes = styled.div`
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     grid-gap: 1em;
   }
-  .blue .info h4 {
-    color: #2c6dff;
+  .blue {
+    border: 1px solid #2c6dff2f;
+    .info h4 {
+      color: #2c6dff;
+    }
   }
-  .default .info h4 {
-    color: #3639ae;
+
+  .default {
+    border: 1px solid #3638ae2f;
+    .info h4 {
+      color: #3639ae;
+    }
   }
-  .green .info h4 {
-    color: #82c519;
+
+  .green {
+    border: 1px solid #82c5192f;
+    .info h4 {
+      color: #82c519;
+    }
   }
-  .orange .info h4 {
-    color: #ff6a07;
+
+  .orange {
+    border: 1px solid #ff6a072f;
+    .info h4 {
+      color: #ff6a07;
+    }
   }
-  .redark .info h4 {
-    color: #b70202;
+
+  .redark {
+    border: 1px solid #b702022f;
+    .info h4 {
+      color: #b70202;
+    }
   }
-  .red .info h4 {
-    color: #e00000;
+
+  .red {
+    border: 1px solid #e000002f;
+    .info h4 {
+      color: #e00000;
+    }
   }
 `;
 
 const StyledTotalBox = styled.div`
   box-shadow: 0 15px 30px 0 rgba(20, 50, 90, 0.05);
-  border-color: #3639ae;
   background: #fff;
   padding: 1.8rem;
   position: relative;

@@ -28,7 +28,7 @@ export const StateCovidTracker = ({ children }) => {
           const countries = data.map((country) => ({
             name: country.country,
             cases: country.cases,
-            new: country.todayCases,
+            newCases: country.todayCases,
             deaths: country.deaths,
             newDeaths: country.todayDeaths,
             recovered: country.recovered,
