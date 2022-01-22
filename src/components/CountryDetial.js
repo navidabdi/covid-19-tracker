@@ -5,51 +5,78 @@ import { numberWithCommas } from '../Util';
 const CountryDetial = () => {
   const { countries, isLoading } = useStateContext();
   return (
-    <StyledCountyDetail>
-      <table>
+    <>
+      <StyledHeadTable>
         <thead>
           <tr>
-            <th scope="col">Region</th>
-            <th scope="col">Total Cases</th>
+            <th scope="col" className="region">
+              Region
+            </th>
+            <th scope="col">Cases</th>
             <th scope="col">New Cases</th>
-            <th scope="col">Total Deaths</th>
+            <th scope="col">Deaths</th>
             <th scope="col">New Deaths</th>
-            <th scope="col">Total Recovered</th>
+            <th scope="col">Recovered</th>
           </tr>
         </thead>
-        <tbody>
-          {isLoading &&
-            countries.map((country, index) => (
-              <tr className="country-detial" key={index}>
-                <td className="flag">
-                  <img src={country.flag} alt={country.name} />
-                  <span>{country.name}</span>
-                </td>
-                {/* <td className="name">{country.name}</td> */}
-                <td className="total-cases">
-                  {numberWithCommas(country.cases)}
-                </td>
-                <td className="new-cases">
-                  {numberWithCommas(country.newCases)}
-                </td>
-                <td className="toatal-deaths">
-                  {numberWithCommas(country.deaths)}
-                </td>
-                <td className="new-deaths">
-                  {numberWithCommas(country.newDeaths)}
-                </td>
-                <td className="total-recovered">
-                  {numberWithCommas(country.recovered)}
-                </td>
-              </tr>
-            ))}
-        </tbody>
-      </table>
-    </StyledCountyDetail>
+      </StyledHeadTable>
+      <StyledCountyDetail>
+        <table>
+          <tbody>
+            {isLoading &&
+              countries.map((country, index) => (
+                <tr className="country-detial" key={index}>
+                  <td className="flag">
+                    <img src={country.flag} alt={country.name} />
+                    <span>{country.name}</span>
+                  </td>
+                  <td className="total-cases">
+                    {numberWithCommas(country.cases)}
+                  </td>
+                  <td className="new-cases">
+                    {numberWithCommas(country.newCases)}
+                  </td>
+                  <td className="toatal-deaths">
+                    {numberWithCommas(country.deaths)}
+                  </td>
+                  <td className="new-deaths">
+                    {numberWithCommas(country.newDeaths)}
+                  </td>
+                  <td className="total-recovered">
+                    {numberWithCommas(country.recovered)}
+                  </td>
+                </tr>
+              ))}
+          </tbody>
+        </table>
+      </StyledCountyDetail>
+    </>
   );
 };
 
 export default CountryDetial;
+
+const StyledHeadTable = styled.table`
+  @media only screen and (max-width: 760px) {
+    display: none;
+  }
+  background-color: #fff;
+  width: 100%;
+  padding: 15px;
+  tr {
+    display: flex;
+    justify-content: space-between;
+  }
+  tr th {
+    width: 14%;
+
+    font-size: 0.8rem;
+    text-align: left;
+    &:first-child {
+      width: 30%;
+    }
+  }
+`;
 
 const StyledCountyDetail = styled.div`
   height: 500px;
@@ -75,10 +102,27 @@ const StyledCountyDetail = styled.div`
   }
   td {
     text-align: left;
-    padding: 15px 5px;
+    padding: 10px 5px;
     border-bottom: 1px solid #e6ebff;
+    font-size: 0.9rem;
   }
-  @media only screen and (max-width: 760px) {
+  @media only screen and (min-width: 768px) {
+    tr.country-detial {
+      display: flex;
+      justify-content: space-between;
+    }
+    tr.country-detial td:not(.flag) {
+      width: 14%;
+    }
+    tr.country-detial td.flag {
+      width: 30%;
+    }
+    thead tr {
+      display: flex;
+    }
+  }
+
+  @media only screen and (max-width: 768px) {
     /* Force table to not be like tables anymore */
     table,
     thead,
