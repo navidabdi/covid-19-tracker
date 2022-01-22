@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { useStateContext } from '../contexts/StateCovidTracker';
 import { HumanTime } from '../Util';
+// Components
+import ContrySelect from './ContrySelect';
 // Logo
 import logo from '../img/logo.png';
 const Header = () => {
@@ -17,6 +19,7 @@ const Header = () => {
           <h3 className="last-update">
             Updated: {isLoading && HumanTime(countryInfo.updated)}
           </h3>
+          <ContrySelect />
         </nav>
       </div>
     </StyledHeader>
@@ -26,7 +29,7 @@ const Header = () => {
 export default Header;
 
 const StyledHeader = styled.header`
-  background-color: #fff;
+  border-bottom: 2px solid #e8eaff;
   margin-bottom: 2rem;
   nav {
     display: flex;

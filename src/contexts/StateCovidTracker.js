@@ -27,6 +27,7 @@ export const StateCovidTracker = ({ children }) => {
         .then((data) => {
           const countries = data.map((country) => ({
             name: country.country,
+            value: country.countryInfo.iso2,
             cases: country.cases,
             newCases: country.todayCases,
             deaths: country.deaths,
