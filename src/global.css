@@ -6,11 +6,12 @@
 body {
   font-family: sans-serif;
   overflow-x: hidden;
+  color: #515184;
+  background-color: #f7f8fc;
 }
 .container {
   width: 1280px;
   margin: auto;
-  display: flex;
 }
 .counties {
   /* width: 70%; */
@@ -67,4 +68,24 @@ img {
 [class*='col-'] {
   float: left;
   padding: 15px;
+}
+@media only screen and (max-width: 760px) {
+  .col-3,
+  .col-4,
+  .col-5,
+  .col-6,
+  .col-7,
+  .col-8,
+  .col-9 {
+    width: 100%;
+  }
+}
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(359deg);
+  }
 }
