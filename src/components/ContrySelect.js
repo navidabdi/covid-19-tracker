@@ -1,42 +1,66 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import styled from 'styled-components';
 import { useStateContext } from '../contexts/StateCovidTracker';
 const ContrySelect = () => {
-  const { countries, isLoading } = useStateContext();
+  const {
+    countries,
+    isLoading,
+    selectCountry,
+    setSelectCountry,
+    countryValue,
+    setCountryValue,
+  } = useStateContext();
+  // const [selectCountry, setSelectCountry] = useState('WordWide');
+  const [openSelectCountry, setOpenSelectCountry] = useState(false);
 
-  const openSelect = () => {
-    const selectWrap = document.querySelector('.select_wrap');
-    selectWrap.classList.toggle('active');
-  };
-
-  const selectUlLis = document.querySelectorAll('.select_ul li');
-  selectUlLis.forEach((selectUlLi) => {
-    console.log(selectUlLi);
-  });
-
-  //   $('.select_ul li').click(function () {
-  //     var currentele = $(this).html();
-  //     $('.default_option li').html(currentele);
-  //     $(this).parents('.select_wrap').removeClass('active');
-  //   });
+  const selectWrap = document.querySelector('.select_wrap');
+  if (selectWrap) {
+    if (openSelectCountry) {
+      selectWrap.classList.add('active');
+    } else {
+      selectWrap.classList.remove('active');
+    }
+  }
 
   return (
     <>
-      <StyledContrySelect className="wrapper">
-        <div className="select_wrap">
-          <ul onClick={openSelect} className="default_option">
-            <li>WordWide</li>
-          </ul>
-          <ul className="select_ul">
-            {countries.map((country, index) => (
-              <li key={index} value={country.value}>
-                {country.name}
+      {isLoading && (
+        <StyledContrySelect className="wrapper">
+          <div className="select_wrap">
+            <ul
+              onClick={() => setOpenSelectCountry(!openSelectCountry)}
+              className="default_option"
+            >
+              <li>{selectCountry}</li>
+            </ul>
+            <ul className="select_ul">
+              <li
+                onClick={() => {
+                  setSelectCountry('WordWide');
+                  setCountryValue('WordWide');
+                  setOpenSelectCountry(!openSelectCountry);
+                }}
+              >
+                WordWide
               </li>
-            ))}
-          </ul>
-        </div>
-      </StyledContrySelect>
+              {countries.map((country, index) => (
+                <li
+                  onClick={() => {
+                    setSelectCountry(country.name);
+                    setOpenSelectCountry(!openSelectCountry);
+                    setCountryValue(country.value);
+                  }}
+                  key={index}
+                  value={country.value}
+                >
+                  {country.name}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </StyledContrySelect>
+      )}
     </>
   );
 };

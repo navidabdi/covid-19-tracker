@@ -11,14 +11,19 @@ export const StateCovidTracker = ({ children }) => {
   const [countries, setCountries] = useState([]);
 
   const [countryInfo, setCountryInfo] = useState({});
-
+  const [selectCountry, setSelectCountry] = useState('WordWide');
+  const [countryValue, setCountryValue] = useState('WordWide');
+  const url =
+    countryValue === 'WordWide'
+      ? 'https://disease.sh/v3/covid-19/all'
+      : `https://disease.sh/v3/covid-19/countries/${countryValue}`;
   useEffect(() => {
-    fetch('https://disease.sh/v3/covid-19/all')
+    fetch(url)
       .then((response) => response.json())
       .then((data) => {
         setCountryInfo(data);
       });
-  }, []);
+  }, [countryValue]);
 
   useEffect(() => {
     const getCountriesData = async () => {
@@ -52,6 +57,10 @@ export const StateCovidTracker = ({ children }) => {
         darkMode,
         setDarkMode,
         isLoading,
+        selectCountry,
+        setSelectCountry,
+        countryValue,
+        setCountryValue,
       }}
     >
       {children}
