@@ -5,7 +5,7 @@ import { showDataOnMap } from '../Util';
 import { useStateContext } from '../contexts/StateCovidTracker';
 import 'leaflet/dist/leaflet.css';
 const Map = () => {
-  const { mapCountries, countries, mapCenter, mapZoom } = useStateContext();
+  const { mapCountries, casesType, mapCenter, mapZoom } = useStateContext();
   return (
     <StyledMap className="map">
       <LeafletMap center={mapCenter} zoom={mapZoom}>
@@ -13,7 +13,7 @@ const Map = () => {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         />
-        {showDataOnMap(mapCountries, 'cases')}
+        {showDataOnMap(mapCountries, casesType)}
       </LeafletMap>
     </StyledMap>
   );
@@ -26,7 +26,7 @@ const StyledMap = styled.div`
   background-color: white;
   padding: 1rem;
   box-shadow: 0 15px 30px 0 rgba(20, 50, 90, 0.05);
-
+  margin-bottom: 2rem;
   .leaflet-container {
     height: 100%;
     border-radius: 3px;
@@ -39,7 +39,7 @@ const StyledMap = styled.div`
     border-radius: 3px;
   }
   .leaflet-popup-content {
-    margin: 15px;
+    margin: 1.2rem;
     line-height: 1.4;
   }
   .info-flag img {
@@ -58,17 +58,18 @@ const StyledMap = styled.div`
   }
 
   .info-flag {
-    height: 50px;
+    height: 60px;
     width: 100%;
     background-size: cover;
+    background-position: center;
     border-radius: 3px;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
   }
 
   .info-confirmed,
   .info-recovered,
   .info-deaths {
-    font-size: 0.7rem;
-    margin-top: 3px;
+    font-size: 1rem;
+    margin-top: 5px;
   }
 `;

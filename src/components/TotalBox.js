@@ -12,7 +12,7 @@ import covidOrange from '../img/covid-orange.svg';
 import covidRedDark from '../img/covid-redark.svg';
 
 const TotalBox = () => {
-  const { countryInfo, isLoading } = useStateContext();
+  const { countryInfo, isLoading, casesType, setCasesType } = useStateContext();
   const {
     population,
     cases,
@@ -24,11 +24,15 @@ const TotalBox = () => {
     todayRecovered,
     tests,
   } = countryInfo;
+  console.log(casesType);
   return (
     <>
       {isLoading && (
         <StyeldAllTotalBoxes>
-          <StyledTotalBox className="blue">
+          <StyledTotalBox
+            className="blue"
+            onClick={(e) => setCasesType('population')}
+          >
             <div className="icon">
               <img src={covidBlue} alt="" />
             </div>
@@ -46,7 +50,10 @@ const TotalBox = () => {
               <h4>{numeral(tests).format('0.000a')}</h4>
             </div>
           </StyledTotalBox> */}
-          <StyledTotalBox className="default">
+          <StyledTotalBox
+            className="default"
+            onClick={(e) => setCasesType('cases')}
+          >
             <div className="icon">
               <img src={covidDefault} alt="" />
             </div>
@@ -55,7 +62,10 @@ const TotalBox = () => {
               <h4>{numeral(cases).format('0.000a')}</h4>
             </div>
           </StyledTotalBox>
-          <StyledTotalBox className="red">
+          <StyledTotalBox
+            className="red"
+            onClick={(e) => setCasesType('deaths')}
+          >
             <div className="icon">
               <img src={covidRed} alt="" />
             </div>
@@ -65,7 +75,10 @@ const TotalBox = () => {
             </div>
           </StyledTotalBox>
 
-          <StyledTotalBox className="green">
+          <StyledTotalBox
+            className="green"
+            onClick={(e) => setCasesType('recovered')}
+          >
             <div className="icon">
               <img src={covidGreen} alt="" />
             </div>
@@ -75,7 +88,10 @@ const TotalBox = () => {
             </div>
           </StyledTotalBox>
 
-          <StyledTotalBox className="blue">
+          <StyledTotalBox
+            className="blue"
+            onClick={(e) => setCasesType('active')}
+          >
             <div className="icon">
               <img src={covidBlue} alt="" />
             </div>
@@ -85,7 +101,10 @@ const TotalBox = () => {
             </div>
           </StyledTotalBox>
 
-          <StyledTotalBox className="orange">
+          <StyledTotalBox
+            className="orange"
+            onClick={(e) => setCasesType('todayCases')}
+          >
             <div className="icon">
               <img src={covidOrange} alt="" />
             </div>
@@ -95,7 +114,10 @@ const TotalBox = () => {
             </div>
           </StyledTotalBox>
 
-          <StyledTotalBox className="redark">
+          <StyledTotalBox
+            className="redark"
+            onClick={(e) => setCasesType('todayDeaths')}
+          >
             <div className="icon">
               <img src={covidRedDark} alt="" />
             </div>
@@ -105,7 +127,10 @@ const TotalBox = () => {
             </div>
           </StyledTotalBox>
 
-          <StyledTotalBox className="green">
+          <StyledTotalBox
+            className="green"
+            onClick={(e) => setCasesType('todayRecovered')}
+          >
             <div className="icon">
               <img src={covidGreen} alt="" />
             </div>
@@ -126,9 +151,9 @@ const StyeldAllTotalBoxes = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   grid-gap: 1em;
-
+  margin-bottom: 2rem;
   @media only screen and (max-width: 768px) {
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     grid-gap: 1em;
   }
   .blue {
@@ -181,6 +206,7 @@ const StyledTotalBox = styled.div`
   position: relative;
   overflow: hidden;
   z-index: 1;
+  cursor: pointer;
   transition: all 0.5s;
   &:hover {
     transform: translateY(-10px);

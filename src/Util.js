@@ -18,26 +18,75 @@ export const HumanTime = (timestamp) => {
 };
 const casesTypeColors = {
   cases: {
-    hex: '#CC1034',
-    rgb: 'rgb(204, 16, 52)',
-    half_op: 'rgba(204, 16, 52, 0.5)',
-    multiplier: 800,
+    hex: '#3639ae',
+    rgb: 'rgb(54, 57, 174)',
+    half_op: 'rgba(54, 57, 174,.5)',
+    multiplier: 200,
   },
   recovered: {
-    hex: '#7dd71d',
-    rgb: 'rgb(125, 215, 29)',
-    half_op: 'rgba(125, 215, 29, 0.5)',
-    multiplier: 1200,
+    hex: '#82c519',
+    rgb: 'rgb(130, 197 ,25)',
+    half_op: 'rgba(130, 197, 25,.5)',
+    multiplier: 300,
   },
   deaths: {
-    hex: '#fb4443',
-    rgb: 'rgb(251, 68, 67)',
-    half_op: 'rgba(251, 68, 67, 0.5)',
-    multiplier: 2000,
+    hex: '#e00000',
+    rgb: 'rgb(224, 0 ,0)',
+    half_op: 'rgba(224, 0, 0,.5)',
+    multiplier: 1500,
+  },
+  population: {
+    hex: '#2c6dff',
+    rgb: 'rgb(44, 109, 255)',
+    half_op: 'rgba(44, 109, 255,.5)',
+    multiplier: 50,
+  },
+  active: {
+    hex: '#2c6dff',
+    rgb: 'rgb(44, 109, 255)',
+    half_op: 'rgba(44, 109, 255,.5)',
+    multiplier: 400,
+  },
+  todayCases: {
+    hex: '#ff6a07',
+    rgb: 'rgb(255, 106, 7)',
+    half_op: 'rgba(255, 106, 7,.5)',
+    multiplier: 10000,
+  },
+  todayDeaths: {
+    hex: '#b70202',
+    rgb: 'rgb(183, 2, 2)',
+    half_op: 'rgba(183, 2, 2,.5)',
+    multiplier: 100000,
+  },
+  todayRecovered: {
+    hex: '#82c519',
+    rgb: 'rgb(130, 197 ,25)',
+    half_op: 'rgba(130, 197, 25,.5)',
+    multiplier: 4000,
   },
 };
-
-export const showDataOnMap = (data, casesType = 'cases') =>
+const useCaseType = (country, cases) => {
+  switch (cases) {
+    case 'population':
+      return numeral(country.population).format('0,0');
+    case 'deaths':
+      return numeral(country.deaths).format('0,0');
+    case 'recovered':
+      return numeral(country.recovered).format('0,0');
+    case 'active':
+      return numeral(country.active).format('0,0');
+    case 'todayCases':
+      return numeral(country.todayCases).format('0,0');
+    case 'todayDeaths':
+      return numeral(country.todayDeaths).format('0,0');
+    case 'todayRecovered':
+      return numeral(country.todayRecovered).format('0,0');
+    default:
+      return numeral(country.cases).format('0,0');
+  }
+};
+export const showDataOnMap = (data, casesType) =>
   data.map((country) => (
     <Circle
       center={[country.countryInfo.lat, country.countryInfo.long]}
@@ -45,9 +94,7 @@ export const showDataOnMap = (data, casesType = 'cases') =>
       fillColor={casesTypeColors[casesType].hex}
       fillOpacity={0.4}
       radius={
-        (Math.sqrt(country[casesType]) *
-          casesTypeColors[casesType].multiplier) /
-        5
+        Math.sqrt(country[casesType]) * casesTypeColors[casesType].multiplier
       }
     >
       <Popup>
@@ -58,6 +105,10 @@ export const showDataOnMap = (data, casesType = 'cases') =>
           ></div>
           <div className="info-name">{country.country}</div>
           <div className="info-confirmed">
+            {/* {console.log(useCaseType(country, casesType))} */}
+            {casesType}: {useCaseType(country, casesType)}
+          </div>
+          {/* <div className="info-confirmed">
             Cases: {numeral(country.cases).format('0,0')}
           </div>
           <div className="info-recovered">
@@ -65,7 +116,7 @@ export const showDataOnMap = (data, casesType = 'cases') =>
           </div>
           <div className="info-deaths">
             Deaths: {numeral(country.deaths).format('0,0')}
-          </div>
+          </div> */}
         </div>
       </Popup>
     </Circle>

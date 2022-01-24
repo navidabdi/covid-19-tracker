@@ -9,7 +9,7 @@ export const StateCovidTracker = ({ children }) => {
   //   State Of Loading
   const [isLoading, setIsLoading] = useState(false);
   const [countries, setCountries] = useState([]);
-
+  const [casesType, setCasesType] = useState('cases');
   const [countryInfo, setCountryInfo] = useState({});
   const [selectCountry, setSelectCountry] = useState('WordWide');
   const [countryValue, setCountryValue] = useState('WordWide');
@@ -76,6 +76,8 @@ export const StateCovidTracker = ({ children }) => {
         mapCenter,
         mapZoom,
         mapCountries,
+        setCasesType,
+        casesType,
       }}
     >
       {children}

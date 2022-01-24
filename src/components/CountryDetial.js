@@ -5,7 +5,7 @@ import { numberWithCommas } from '../Util';
 const CountryDetial = () => {
   const { countries, isLoading } = useStateContext();
   return (
-    <>
+    <div>
       <StyledHeadTable>
         <thead>
           <tr>
@@ -15,7 +15,7 @@ const CountryDetial = () => {
             <th scope="col">Cases</th>
             <th scope="col">New Cases</th>
             <th scope="col">Deaths</th>
-            <th scope="col">New Deaths</th>
+            {/* <th scope="col">New Deaths</th> */}
             <th scope="col">Recovered</th>
           </tr>
         </thead>
@@ -39,9 +39,9 @@ const CountryDetial = () => {
                   <td className="toatal-deaths">
                     {numberWithCommas(country.deaths)}
                   </td>
-                  <td className="new-deaths">
+                  {/* <td className="new-deaths">
                     {numberWithCommas(country.newDeaths)}
-                  </td>
+                  </td> */}
                   <td className="total-recovered">
                     {numberWithCommas(country.recovered)}
                   </td>
@@ -50,7 +50,7 @@ const CountryDetial = () => {
           </tbody>
         </table>
       </StyledCountyDetail>
-    </>
+    </div>
   );
 };
 
