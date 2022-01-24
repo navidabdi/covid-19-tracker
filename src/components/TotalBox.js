@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { useStateContext } from '../contexts/StateCovidTracker';
 import { numberWithCommas } from '../Util';
+import numeral from 'numeral';
 // Images
 import covidDefault from '../img/covid-defult.svg';
 import covidRed from '../img/covid-red.svg';
@@ -33,25 +34,25 @@ const TotalBox = () => {
             </div>
             <div className="info">
               <h3>Population</h3>
-              <h4>{numberWithCommas(population)}</h4>
+              <h4>{numeral(population).format('0.000a')}</h4>
             </div>
           </StyledTotalBox>
-          <StyledTotalBox className="default">
+          {/* <StyledTotalBox className="default">
             <div className="icon">
               <img src={covidDefault} alt="" />
             </div>
             <div className="info">
               <h3>Total Tests</h3>
-              <h4>{numberWithCommas(tests)}</h4>
+              <h4>{numeral(tests).format('0.000a')}</h4>
             </div>
-          </StyledTotalBox>
+          </StyledTotalBox> */}
           <StyledTotalBox className="default">
             <div className="icon">
               <img src={covidDefault} alt="" />
             </div>
             <div className="info">
               <h3>Total Cases</h3>
-              <h4>{numberWithCommas(cases)}</h4>
+              <h4>{numeral(cases).format('0.000a')}</h4>
             </div>
           </StyledTotalBox>
           <StyledTotalBox className="red">
@@ -60,7 +61,7 @@ const TotalBox = () => {
             </div>
             <div className="info">
               <h3>Total Deaths</h3>
-              <h4>{numberWithCommas(deaths)}</h4>
+              <h4>{numeral(deaths).format('0.000a')}</h4>
             </div>
           </StyledTotalBox>
 
@@ -69,8 +70,8 @@ const TotalBox = () => {
               <img src={covidGreen} alt="" />
             </div>
             <div className="info">
-              <h3>Total Recovered</h3>
-              <h4>{numberWithCommas(recovered)}</h4>
+              <h3>Recovered</h3>
+              <h4>{numeral(recovered).format('0.000a')}</h4>
             </div>
           </StyledTotalBox>
 
@@ -80,7 +81,7 @@ const TotalBox = () => {
             </div>
             <div className="info">
               <h3>Total Active</h3>
-              <h4>{numberWithCommas(active)}</h4>
+              <h4>{numeral(active).format('0.000a')}</h4>
             </div>
           </StyledTotalBox>
 
@@ -90,7 +91,7 @@ const TotalBox = () => {
             </div>
             <div className="info">
               <h3>Today Cases</h3>
-              <h4>{numberWithCommas(todayCases)}</h4>
+              <h4>{numeral(todayCases).format('0.a')}</h4>
             </div>
           </StyledTotalBox>
 
@@ -100,7 +101,7 @@ const TotalBox = () => {
             </div>
             <div className="info">
               <h3>Today Deaths</h3>
-              <h4>{numberWithCommas(todayDeaths)}</h4>
+              <h4>{numeral(todayDeaths).format('0.a')}</h4>
             </div>
           </StyledTotalBox>
 
@@ -109,8 +110,8 @@ const TotalBox = () => {
               <img src={covidGreen} alt="" />
             </div>
             <div className="info">
-              <h3>Today Recovered</h3>
-              <h4>{numberWithCommas(todayRecovered)}</h4>
+              <h3>N Recovered</h3>
+              <h4>{numeral(todayRecovered).format('0.a')}</h4>
             </div>
           </StyledTotalBox>
         </StyeldAllTotalBoxes>

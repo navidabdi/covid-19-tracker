@@ -15,6 +15,7 @@ export const StateCovidTracker = ({ children }) => {
   const [countryValue, setCountryValue] = useState('WordWide');
   const [mapCountries, setMapCountries] = useState([]);
   const [mapCenter, setMapCenter] = useState({ lat: 34.80746, lng: -40.4796 });
+
   const [mapZoom, setMapZoom] = useState(3.2);
 
   const url =
@@ -26,6 +27,10 @@ export const StateCovidTracker = ({ children }) => {
       .then((response) => response.json())
       .then((data) => {
         setCountryInfo(data);
+        if (countryValue === 'WordWide') {
+          setMapCenter([34.80746, -40.4796]);
+          setMapZoom(3);
+        }
         setMapCenter([data.countryInfo.lat, data.countryInfo.long]);
         setMapZoom(4);
       });
