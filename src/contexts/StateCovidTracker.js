@@ -13,6 +13,10 @@ export const StateCovidTracker = ({ children }) => {
   const [countryInfo, setCountryInfo] = useState({});
   const [selectCountry, setSelectCountry] = useState('WordWide');
   const [countryValue, setCountryValue] = useState('WordWide');
+  const [mapCountries, setMapCountries] = useState([]);
+  const [mapCenter, setMapCenter] = useState({ lat: 34.80746, lng: -40.4796 });
+  const [mapZoom, setMapZoom] = useState(3.2);
+
   const url =
     countryValue === 'WordWide'
       ? 'https://disease.sh/v3/covid-19/all'
@@ -22,6 +26,8 @@ export const StateCovidTracker = ({ children }) => {
       .then((response) => response.json())
       .then((data) => {
         setCountryInfo(data);
+        setMapCenter([data.countryInfo.lat, data.countryInfo.long]);
+        setMapZoom(4);
       });
   }, [countryValue]);
 
@@ -41,6 +47,7 @@ export const StateCovidTracker = ({ children }) => {
             flag: country.countryInfo.flag,
           }));
           setCountries(countries);
+          setMapCountries(data);
           setIsLoading(true);
         });
     };
@@ -61,6 +68,9 @@ export const StateCovidTracker = ({ children }) => {
         setSelectCountry,
         countryValue,
         setCountryValue,
+        mapCenter,
+        mapZoom,
+        mapCountries,
       }}
     >
       {children}

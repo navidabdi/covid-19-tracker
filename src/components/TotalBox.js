@@ -123,11 +123,11 @@ export default TotalBox;
 
 const StyeldAllTotalBoxes = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(318px, 1fr));
-  grid-gap: 2em;
-  margin-bottom: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-gap: 1em;
+
   @media only screen and (max-width: 768px) {
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
     grid-gap: 1em;
   }
   .blue {
@@ -176,7 +176,7 @@ const StyeldAllTotalBoxes = styled.div`
 const StyledTotalBox = styled.div`
   box-shadow: 0 15px 30px 0 rgba(20, 50, 90, 0.05);
   background: #fff;
-  padding: 1.8rem;
+  padding: 1.5rem;
   position: relative;
   overflow: hidden;
   z-index: 1;
@@ -203,7 +203,7 @@ const StyledTotalBox = styled.div`
     }
   }
   .info h3 {
-    font-size: 18px;
+    font-size: 0.95rem;
     font-weight: 500;
     color: #000;
     margin: -15px -20px 10px -20px;
@@ -211,7 +211,7 @@ const StyledTotalBox = styled.div`
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   }
   .info h4 {
-    font-size: 1.8rem;
+    font-size: 1.3rem;
     margin-bottom: 0;
     font-weight: 600;
     @media only screen and (max-width: 768px) {
