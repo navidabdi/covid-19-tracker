@@ -14,11 +14,14 @@ const Header = () => {
         <nav>
           <a className="logo" href="/">
             <img src={logo} alt="COVID-19 Tracker Logo" />
-            <p>COVID-19 TRAKER</p>
+            <div className="logo-title">
+              <p>COVID-19 TRAKER</p>
+              <p className="last-update">
+                Updated: {isLoading && HumanTime(countryInfo.updated)}
+              </p>
+            </div>
           </a>
-          <h3 className="last-update">
-            Updated: {isLoading && HumanTime(countryInfo.updated)}
-          </h3>
+
           <ContrySelect />
         </nav>
       </div>
@@ -33,22 +36,35 @@ const StyledHeader = styled.header`
   margin-bottom: 2rem;
   nav {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
+    padding: 1.2rem 0;
+    @media only screen and (max-width: 768px) {
+      justify-content: center;
+    }
   }
   .logo {
-    height: 12vh;
     display: flex;
     align-items: center;
+    @media only screen and (max-width: 768px) {
+      padding: 1rem;
+      padding-top: 0;
+    }
     img {
       width: 50px;
       margin-right: 0.8rem;
       animation: rotation 10s infinite linear;
     }
     p {
-      font-size: 1.5rem;
+      font-size: 1.3rem;
       font-weight: bold;
       color: #050622;
+    }
+    .last-update {
+      font-size: 0.9rem;
+      font-weight: 300;
+      margin-top: 3px;
     }
   }
 `;
