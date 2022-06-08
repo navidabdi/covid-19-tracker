@@ -33,7 +33,7 @@ export const StateCovidTracker = ({ children }) => {
         setMapCenter([data.countryInfo.lat, data.countryInfo.long]);
         setMapZoom(4);
       });
-  }, [countryValue]);
+  }, [countryValue, url]);
 
   useEffect(() => {
     const getCountriesData = async () => {
