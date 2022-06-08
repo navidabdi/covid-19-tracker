@@ -34,63 +34,65 @@ const ContrySelect = () => {
             >
               <li>{selectCountry}</li>
             </ul>
-            <ul className="select_ul">
+            <div>
               <input
                 onChange={(e) => setSearchedCountry(e.target.value)}
                 placeholder="Search"
                 value={searchedCountry}
                 type="text"
               />
-              {!searchedCountry && (
-                <li
-                  onClick={() => {
-                    setSelectCountry('WordWide');
-                    setCountryValue('WordWide');
-                    setOpenSelectCountry(!openSelectCountry);
-                  }}
-                >
-                  WordWide
-                </li>
-              )}
+              <ul className="select_ul">
+                {!searchedCountry && (
+                  <li
+                    onClick={() => {
+                      setSelectCountry('WordWide');
+                      setCountryValue('WordWide');
+                      setOpenSelectCountry(!openSelectCountry);
+                    }}
+                  >
+                    WordWide
+                  </li>
+                )}
 
-              {!searchedCountry
-                ? countries.map((country, index) => (
-                    <li
-                      onClick={() => {
-                        setSelectCountry(country.name);
-                        setOpenSelectCountry(!openSelectCountry);
-                        setCountryValue(country.value);
-                      }}
-                      key={index}
-                      value={country.value}
-                    >
-                      {country.name}
-                    </li>
-                  ))
-                : countries
-                    .filter((count) =>
-                      count.name
-                        .toUpperCase()
-                        .includes(searchedCountry.toUpperCase())
-                    )
-                    .map((country, index) => (
+                {!searchedCountry
+                  ? countries.map((country, index) => (
                       <li
                         onClick={() => {
                           setSelectCountry(country.name);
                           setOpenSelectCountry(!openSelectCountry);
                           setCountryValue(country.value);
-                          setSearchedCountry('');
                         }}
                         key={index}
                         value={country.value}
                       >
                         {country.name}
                       </li>
-                    ))}
-              {console.log(
-                countries.filter((country) => country.name == searchedCountry)
-              )}
-            </ul>
+                    ))
+                  : countries
+                      .filter((count) =>
+                        count.name
+                          .toUpperCase()
+                          .includes(searchedCountry.toUpperCase())
+                      )
+                      .map((country, index) => (
+                        <li
+                          onClick={() => {
+                            setSelectCountry(country.name);
+                            setOpenSelectCountry(!openSelectCountry);
+                            setCountryValue(country.value);
+                            setSearchedCountry('');
+                          }}
+                          key={index}
+                          value={country.value}
+                        >
+                          {country.name}
+                        </li>
+                      ))}
+                {console.log(
+                  countries.filter((country) => country.name == searchedCountry)
+                )}
+              </ul>
+            </div>
           </div>
         </StyledContrySelect>
       )}
@@ -115,6 +117,21 @@ const StyledContrySelect = styled.div`
     position: relative;
     user-select: none;
     overflow: hidden;
+    div {
+      position: absolute;
+      top: 150px;
+      left: 0;
+      transition: all 0.3s ease-in-out;
+      width: 100%;
+      input {
+        padding: 0.7rem 1rem;
+        border: navajowhite;
+        background: #f5f8ff;
+        width: 100%;
+        font-size: 1rem;
+        outline: none;
+      }
+    }
   }
   .select_wrap .default_option::before {
     transition: all 0.3s ease-in-out;
@@ -148,24 +165,13 @@ const StyledContrySelect = styled.div`
     height: 50vh;
     overflow-y: scroll;
     box-shadow: 0 20px 30px 0 rgba(38, 57, 52, 0.1);
-    position: absolute;
-    top: 150px;
-    left: 0;
     width: 100%;
-    transition: all 0.3s ease-in-out;
+
     &::-webkit-scrollbar {
       width: 5px;
     }
     &::-webkit-scrollbar-track {
       box-shadow: inset 0 0 6px rgba(103, 58, 183, 0.1) !important;
-    }
-    input {
-      padding: 0.7rem 1rem;
-      border: navajowhite;
-      background: #f5f8ff;
-      width: 100%;
-      font-size: 1rem;
-      outline: none;
     }
   }
 
@@ -181,7 +187,7 @@ const StyledContrySelect = styled.div`
   .select_wrap.active {
     overflow: unset;
   }
-  .select_wrap.active .select_ul {
+  .select_wrap.active div {
     top: 50px;
   }
 
