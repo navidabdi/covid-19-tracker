@@ -8,7 +8,6 @@ const ContrySelect = () => {
     isLoading,
     selectCountry,
     setSelectCountry,
-    countryValue,
     setCountryValue,
   } = useStateContext();
   const [searchedCountry, setSearchedCountry] = useState('');
@@ -88,9 +87,6 @@ const ContrySelect = () => {
                           {country.name}
                         </li>
                       ))}
-                {console.log(
-                  countries.filter((country) => country.name == searchedCountry)
-                )}
               </ul>
             </div>
           </div>

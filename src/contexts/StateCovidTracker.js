@@ -1,5 +1,4 @@
 import React, { useState, createContext, useContext, useEffect } from 'react';
-import axios from 'axios';
 const StateContext = createContext();
 
 export const StateCovidTracker = ({ children }) => {

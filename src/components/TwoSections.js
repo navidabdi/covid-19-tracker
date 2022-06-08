@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import TotalBox from './TotalBox';
+
 import CountryDetial from './CountryDetial';
 import LineGraph from './LineGraph';
-import Map from './Map';
+
 const TwoSections = () => {
   return (
     <StyledTwoSections>

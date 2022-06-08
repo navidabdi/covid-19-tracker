@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useStateContext } from '../contexts/StateCovidTracker';
-import { numberWithCommas } from '../Util';
 import numeral from 'numeral';
 // Images
 import covidDefault from '../img/covid-defult.svg';
@@ -22,7 +21,6 @@ const TotalBox = () => {
     todayCases,
     todayDeaths,
     todayRecovered,
-    tests,
   } = countryInfo;
   console.log(casesType);
   return (
@@ -41,15 +39,7 @@ const TotalBox = () => {
               <h4>{numeral(population).format('0.000a')}</h4>
             </div>
           </StyledTotalBox>
-          {/* <StyledTotalBox className="default">
-            <div className="icon">
-              <img src={covidDefault} alt="" />
-            </div>
-            <div className="info">
-              <h3>Total Tests</h3>
-              <h4>{numeral(tests).format('0.000a')}</h4>
-            </div>
-          </StyledTotalBox> */}
+
           <StyledTotalBox
             className="default"
             onClick={(e) => setCasesType('cases')}
