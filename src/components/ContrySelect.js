@@ -11,7 +11,7 @@ const ContrySelect = () => {
     countryValue,
     setCountryValue,
   } = useStateContext();
-  // const [selectCountry, setSelectCountry] = useState('WordWide');
+  const [searchedCountry, setSearchedCountry] = useState('');
   const [openSelectCountry, setOpenSelectCountry] = useState(false);
 
   const selectWrap = document.querySelector('.select_wrap');
@@ -35,28 +35,61 @@ const ContrySelect = () => {
               <li>{selectCountry}</li>
             </ul>
             <ul className="select_ul">
-              <li
-                onClick={() => {
-                  setSelectCountry('WordWide');
-                  setCountryValue('WordWide');
-                  setOpenSelectCountry(!openSelectCountry);
-                }}
-              >
-                WordWide
-              </li>
-              {countries.map((country, index) => (
+              <input
+                onChange={(e) => setSearchedCountry(e.target.value)}
+                placeholder="Search"
+                value={searchedCountry}
+                type="text"
+              />
+              {!searchedCountry && (
                 <li
                   onClick={() => {
-                    setSelectCountry(country.name);
+                    setSelectCountry('WordWide');
+                    setCountryValue('WordWide');
                     setOpenSelectCountry(!openSelectCountry);
-                    setCountryValue(country.value);
                   }}
-                  key={index}
-                  value={country.value}
                 >
-                  {country.name}
+                  WordWide
                 </li>
-              ))}
+              )}
+
+              {!searchedCountry
+                ? countries.map((country, index) => (
+                    <li
+                      onClick={() => {
+                        setSelectCountry(country.name);
+                        setOpenSelectCountry(!openSelectCountry);
+                        setCountryValue(country.value);
+                      }}
+                      key={index}
+                      value={country.value}
+                    >
+                      {country.name}
+                    </li>
+                  ))
+                : countries
+                    .filter((count) =>
+                      count.name
+                        .toUpperCase()
+                        .includes(searchedCountry.toUpperCase())
+                    )
+                    .map((country, index) => (
+                      <li
+                        onClick={() => {
+                          setSelectCountry(country.name);
+                          setOpenSelectCountry(!openSelectCountry);
+                          setCountryValue(country.value);
+                          setSearchedCountry('');
+                        }}
+                        key={index}
+                        value={country.value}
+                      >
+                        {country.name}
+                      </li>
+                    ))}
+              {console.log(
+                countries.filter((country) => country.name == searchedCountry)
+              )}
             </ul>
           </div>
         </StyledContrySelect>
@@ -125,6 +158,14 @@ const StyledContrySelect = styled.div`
     }
     &::-webkit-scrollbar-track {
       box-shadow: inset 0 0 6px rgba(103, 58, 183, 0.1) !important;
+    }
+    input {
+      padding: 0.7rem 1rem;
+      border: navajowhite;
+      background: #f5f8ff;
+      width: 100%;
+      font-size: 1rem;
+      outline: none;
     }
   }
 
